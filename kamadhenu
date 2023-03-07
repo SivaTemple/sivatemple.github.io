@@ -1,0 +1,64 @@
+<!DOCTYPE html><html><head><title>Digital Clock with Date</title><style>
+		body {
+			background-color: blue;
+			background-image: linear-gradient(0deg, blue 60%, blue  74%);
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+		.clock {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 80vh;
+			border: 5px solid #ffffff;
+			border-radius: 0%;
+			box-shadow: 0px 0px 50px #ffffff;
+			padding: 20px;
+		}
+		#time {
+			font-size: 3em;
+			color: #ffffff;
+			margin: 0;
+			text-shadow: 0px 0px 30px #ffffff;
+		}
+		#date {
+			font-size: 2em;
+			color: #ffffff;
+			margin: 0;
+			text-shadow: 0px 0px 30px #ffffff;
+		}
+		#name-address {
+			font-size: 1.2em;
+			color: #ffffff;
+			margin-top: 10px;
+			text-align: center;
+			text-shadow: 0px 0px 30px #ffffff;
+		}
+		#profile-image {
+			width: 50px;
+			height: 50px;
+			border-radius: 5%;
+			border: 0px solid white;
+			margin-bottom: 20px;
+			box-shadow: 0px 0px 30px #ffffff;
+		}</style></head><body><div class="clock"><h1 id="time"></h1><h2 id="date"></h2><p id="name-address">   Thank you to all the members of the Kamadhenu whatsapp group. Welcome To GHANTASALA ARTS.org ఘంటసాల వెంకటసుబ్రహ్మణ్య వర ప్రసాదు. అర్చకులు రామాలయం రాజమండ్రి 9490478707 </p></div><script>
+		function updateTime() {
+			let currentTime = new Date();
+			let hours = currentTime.getHours();
+			let minutes = currentTime.getMinutes();
+			let seconds = currentTime.getSeconds();
+			let day = currentTime.getDate();
+			let month = currentTime.getMonth() + 1;
+			let year = currentTime.getFullYear();
+			hours = (hours < 10 ? "0" : "") + hours;
+			minutes = (minutes < 10 ? "0" : "") + minutes;
+			seconds = (seconds < 10 ? "0" : "") + seconds;
+			month = (month < 10 ? "0" : "") + month;
+			let timeString = hours + ":" + minutes + ":" + seconds;
+			let dateString = day + "/" + month + "/" + year;
+			document.getElementById("time").innerHTML = timeString;
+			document.getElementById("date").innerHTML = dateString;
+		}
+		setInterval(updateTime, 1000);</script></body></html><img id="profile-image" src="img">
