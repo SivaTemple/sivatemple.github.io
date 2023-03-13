@@ -1,64 +1,96 @@
-<!DOCTYPE html><html><head><title>Digital Clock with Date</title><style>
-		body {
-			background-color: blue;
-			background-image: linear-gradient(0deg, blue 60%, blue  74%);
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-		}
-		.clock {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			height: 80vh;
-			border: 5px solid #ffffff;
-			border-radius: 0%;
-			box-shadow: 0px 0px 50px #ffffff;
-			padding: 20px;
-		}
-		#time {
-			font-size: 3em;
-			color: #ffffff;
-			margin: 0;
-			text-shadow: 0px 0px 30px #ffffff;
-		}
-		#date {
-			font-size: 2em;
-			color: #ffffff;
-			margin: 0;
-			text-shadow: 0px 0px 30px #ffffff;
-		}
-		#name-address {
-			font-size: 1.2em;
-			color: #ffffff;
-			margin-top: 10px;
-			text-align: center;
-			text-shadow: 0px 0px 30px #ffffff;
-		}
-		#profile-image {
-			width: 50px;
-			height: 50px;
-			border-radius: 5%;
-			border: 0px solid white;
-			margin-bottom: 20px;
-			box-shadow: 0px 0px 30px #ffffff;
-		}</style></head><body><div class="clock"><h1 id="time"></h1><h2 id="date"></h2><p id="name-address">   Thank you to all the members of the Kamadhenu whatsup group. Welcome To GHANTASALA ARTS.org ఘంటసాల వెంకటసుబ్రహ్మణ్య వర ప్రసాదు. అర్చకులు రామాలయం రాజమండ్రి 9490478707 </p></div><script>
-		function updateTime() {
-			let currentTime = new Date();
-			let hours = currentTime.getHours();
-			let minutes = currentTime.getMinutes();
-			let seconds = currentTime.getSeconds();
-			let day = currentTime.getDate();
-			let month = currentTime.getMonth() + 1;
-			let year = currentTime.getFullYear();
-			hours = (hours < 10 ? "0" : "") + hours;
-			minutes = (minutes < 10 ? "0" : "") + minutes;
-			seconds = (seconds < 10 ? "0" : "") + seconds;
-			month = (month < 10 ? "0" : "") + month;
-			let timeString = hours + ":" + minutes + ":" + seconds;
-			let dateString = day + "/" + month + "/" + year;
-			document.getElementById("time").innerHTML = timeString;
-			document.getElementById("date").innerHTML = dateString;
-		}
-		setInterval(updateTime, 1000);</script></body></html><img id="profile-image" src="img">
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dropdown Example</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+          function getData() {
+            var rasi = $("#rasi-dropdown").val();
+            var graham = $("#graham-dropdown").val();
+            var number = $("#number-dropdown").val();
+            // Assuming that the Excel file is named "data.xlsx"
+            // and is located in the same directory as this HTML file.
+            var url = "data.xlsx";
+            $.ajax({
+              url: url,
+              type: "GET",
+              dataType: "xml",
+              success: function(data) {
+                // Assuming that the data is in the first sheet of the Excel file.
+                var sheet = data.getElementsByTagName("Worksheet")[0];
+                var rows = sheet.getElementsByTagName("Row");
+                var value = "";
+                for (var i = 0; i < rows.length; i++) {
+                  var cells = rows[i].getElementsByTagName("Cell");
+                  var rasi_val = cells[0].childNodes[0].nodeValue;
+                  var graham_val = cells[1].childNodes[0].nodeValue;
+                  var number_val = cells[2].childNodes[0].nodeValue;
+                  var value_val = cells[3].childNodes[0].nodeValue;
+                  if (rasi_val == rasi && graham_val == graham && number_val == number) {
+                    value = value_val;
+                    break;
+                  }
+                }
+                alert("The selected value is: " + value);
+              },
+              error: function(xhr, status, error) {
+                alert("An error occurred while reading the Excel file: " + error);
+              }
+            });
+            return false;
+          }
+        </script>
+    </head>
+    <body>
+        <form>
+            <label for="rasi">Select a Rasi:</label>
+            <select id="rasi" name="rasi">
+                <option value="Mesham">Mesham</option>
+                <option value="Vrishabham">Vrishabham</option>
+                <option value="Mithunam">Mithunam</option>
+                <option value="Karkatakam">Karkatakam</option>
+                <option value="Simham">Simham</option>
+                <option value="Kanyam">Kanyam</option>
+                <option value="Tulam">Tulam</option>
+                <option value="Vrischikam">Vrischikam</option>
+                <option value="Dhanussu">Dhanussu</option>
+                <option value="Makaram">Makaram</option>
+                <option value="Kumbham">Kumbham</option>
+                <option value="Meenam">Meenam</option>
+            </select>
+    
+            <label for="graham">Select a Graham:</label>
+            <select id="graham" name="graham">
+                <option value="Suryan">Suryan</option>
+                <option value="Chandran">Chandran</option>
+                <option value="Mangalan">Mangalan</option>
+                <option value="Budhan">Budhan</option>
+                <option value="Guruvan">Guruvan</option>
+                <option value="Shukran">Shukran</option>
+                <option value="Shanischaran">Shanischaran</option>
+                <option value="Rahuvan">Rahuvan</option>
+                <option value="Kethuvan">Kethuvan</option>
+            </select>
+    
+            <label for="numbers">Select a number:</label>
+            <select id="numbers" name="numbers">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+    
+            <br>
+    
+            <input type="submit" value="Submit" onclick="getData()">
+        </form>
+    </body>
+</html>
