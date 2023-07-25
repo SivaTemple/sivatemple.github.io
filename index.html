@@ -1,96 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Dropdown Example</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-          function getData() {
-            var rasi = $("#rasi").val();
-            var graham = $("#graham").val();
-            var number = $("#numbers").val();
-            // Assuming that the Excel file is named "data.xlsx"
-            // and is located in the same directory as this HTML file.
-            var url = "data.xlsx";
-            $.ajax({
-              url: url,
-              type: "GET",
-              dataType: "xml",
-              success: function(data) {
-                // Assuming that the data is in the first sheet of the Excel file.
-                var sheet = data.getElementsByTagName("Worksheet")[0];
-                var rows = sheet.getElementsByTagName("Row");
-                var value = "";
-                for (var i = 0; i < rows.length; i++) {
-                  var cells = rows[i].getElementsByTagName("Cell");
-                  var rasi_val = cells[0].childNodes[0].nodeValue;
-                  var graham_val = cells[1].childNodes[0].nodeValue;
-                  var number_val = cells[2].childNodes[0].nodeValue;
-                  var value_val = cells[3].childNodes[0].nodeValue;
-                  if (rasi_val == rasi && graham_val == graham && number_val == number) {
-                    value = value_val;
-                    break;
-                  }
-                }
-                alert("The selected value is: " + value);
-              },
-              error: function(xhr, status, error) {
-                alert("An error occurred while reading the Excel file: " + error);
-              }
-            });
-            return false;
-          }
-        </script>
-    </head>
-    <body>
-        <form>
-            <label for="rasi">Select a Rasi:</label>
-            <select id="rasi" name="rasi">
-                <option value="Mesham">Mesham</option>
-                <option value="Vrishabham">Vrishabham</option>
-                <option value="Mithunam">Mithunam</option>
-                <option value="Karkatakam">Karkatakam</option>
-                <option value="Simham">Simham</option>
-                <option value="Kanyam">Kanyam</option>
-                <option value="Tulam">Tulam</option>
-                <option value="Vrischikam">Vrischikam</option>
-                <option value="Dhanussu">Dhanussu</option>
-                <option value="Makaram">Makaram</option>
-                <option value="Kumbham">Kumbham</option>
-                <option value="Meenam">Meenam</option>
-            </select>
-    
-            <label for="graham">Select a Graham:</label>
-            <select id="graham" name="graham">
-                <option value="Suryan">Suryan</option>
-                <option value="Chandran">Chandran</option>
-                <option value="Mangalan">Mangalan</option>
-                <option value="Budhan">Budhan</option>
-                <option value="Guruvan">Guruvan</option>
-                <option value="Shukran">Shukran</option>
-                <option value="Shanischaran">Shanischaran</option>
-                <option value="Rahuvan">Rahuvan</option>
-                <option value="Kethuvan">Kethuvan</option>
-            </select>
-    
-            <label for="numbers">Select a number:</label>
-            <select id="numbers" name="numbers">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-            </select>
-    
-            <br>
-    
-            <input type="submit" value="Submit" onclick="getData()">
-        </form>
-    </body>
+<head>
+  <title>Supermarket Web App</title>
+  <link rel="stylesheet" type="text/css" href="SuperMarket.css">
+</head>
+<body>
+  <h1>Welcome to our Supermarket</h1>
+  
+  <div id="product-list">
+    <h2>Product List</h2>
+    <ul class="product-grid">
+      <li class="product-item">
+        <span class="product-name">Product 1</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Product 1')">Add to Cart</button>
+      </li>
+      <li class="product-item">
+        <span class="product-name">Product 2</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Product 2')">Add to Cart</button>
+      </li>
+      <li class="product-item">
+        <span class="product-name">Product 3</span>
+        <button class="add-to-cart-btn" onclick="addToCart('Product 3')">Add to Cart</button>
+      </li>
+      <!-- Add more products as needed -->
+    </ul>
+  </div>
+  
+  <div id="cart">
+    <h2>Cart</h2>
+    <ul id="cart-items">
+      <!-- Cart items will be dynamically added here -->
+    </ul>
+    <button onclick="checkout()">Checkout</button>
+  </div>
+  
+  <script src="SuperMarket.js"></script>
+</body>
 </html>
